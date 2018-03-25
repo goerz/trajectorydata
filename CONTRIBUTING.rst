@@ -56,11 +56,11 @@ In short,
 1. Clone the repository from ``git@github.com:goerz/trajectorydata.git``
 2. Fork the repo on GitHub to your personal account.
 3. Add your fork as a remote.
-4. Pull in the latest changes from themasterbranch.
+4. Pull in the latest changes from the master branch.
 5. Create a topic branch
 6. Make your changes and commit them (testing locally)
 7. Push changes to the topic branch on *your* remote
-8. Make a pull request against the basemasterbranch through the Github website of your fork.
+8. Make a pull request against the base master branch through the Github website of your fork.
 
 The project contains a ``Makefile`` to help with development tasts. In your checked-out clone, do
 
