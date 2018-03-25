@@ -81,9 +81,9 @@ docs: .venv/docs/bin/sphinx-build ## generate Sphinx HTML documentation, includi
 
 
 
-test-release: clean dist ## package and upload a release to test.pypi.org
+test-release: clean-build clean-pyc dist ## package and upload a release to test.pypi.org
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-release: clean dist ## package and upload a release
+release: clean-bild clean-pyc dist ## package and upload a release
 	twine upload dist/*
 
 
