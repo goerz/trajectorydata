@@ -19,8 +19,6 @@ API
 
    API of the TrajectoryData package <API/trajectorydata>
 
-Indices and tables
-==================
+Index
+=====
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
