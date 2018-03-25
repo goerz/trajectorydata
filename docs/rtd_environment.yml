@@ -1,0 +1,17 @@
+name: py36
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.6
+  - pytest
+  - pytest-cov
+  - pytest-xdist
+  - coverage
+  - sphinx
+  - sphinx_rtd_theme
+  - ipython
+  - pep8
+  - flake8
+  - wheel
+  - numpy
