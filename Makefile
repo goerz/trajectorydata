@@ -74,6 +74,10 @@ test36: .venv/py36/bin/py.test ## run tests for Python 3.6
 	@conda create -y -m -p .venv/docs python=$(PYVERSION) $(CONDA_PACKAGES)
 	@.venv/docs/bin/pip install -e .[dev]
 
+
+coverage: test36  ## generate coverage report in ./htmlcov
+	.venv/py36/bin/coverage html
+
 docs: .venv/docs/bin/sphinx-build ## generate Sphinx HTML documentation, including API docs
 	$(MAKE) -C docs SPHINXBUILD=../.venv/docs/bin/sphinx-build clean
 	$(MAKE) -C docs SPHINXBUILD=../.venv/docs/bin/sphinx-build html
