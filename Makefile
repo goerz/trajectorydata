@@ -5,7 +5,6 @@ TESTENV =
 #TESTENV = MATPLOTLIBRC=tests
 TESTOPTIONS = --doctest-modules --cov=trajectorydata
 TESTS = src tests
-PYVERSION = 3.6
 
 define PRINT_HELP_PYSCRIPT
 import re, sys
@@ -61,8 +60,6 @@ test:  test35 test36 ## run tests on every Python version
 test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
 
-
-
 .venv/py36/bin/py.test:
 	@conda create -y -m -p .venv/py36 python=3.6 $(CONDA_PACKAGES)
 	@.venv/py36/bin/pip install -e .[dev]
@@ -70,26 +67,21 @@ test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 test36: .venv/py36/bin/py.test ## run tests for Python 3.6
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
 
-.venv/docs/bin/sphinx-build:
-	@conda create -y -m -p .venv/docs python=$(PYVERSION) $(CONDA_PACKAGES)
-	@.venv/docs/bin/pip install -e .[dev]
-
+.venv/py36/bin/sphinx-build: ./venv/py36/bin/py.test
 
 coverage: test36  ## generate coverage report in ./htmlcov
 	.venv/py36/bin/coverage html
 
-docs: .venv/docs/bin/sphinx-build ## generate Sphinx HTML documentation, including API docs
-	$(MAKE) -C docs SPHINXBUILD=../.venv/docs/bin/sphinx-build clean
-	$(MAKE) -C docs SPHINXBUILD=../.venv/docs/bin/sphinx-build html
+docs: .venv/py36/bin/sphinx-build ## generate Sphinx HTML documentation, including API docs
+	$(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build clean
+	$(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build html
 	@echo "open docs/_build/html/index.html"
-
-
 
 test-release: clean-build clean-pyc dist ## package and upload a release to test.pypi.org
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
 release: clean-build clean-pyc dist ## package and upload a release
 	twine upload dist/*
-
 
 dist: clean-build clean-pyc ## builds source and wheel package
 	python setup.py sdist
